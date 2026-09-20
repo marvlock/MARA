@@ -1,0 +1,162 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+
+[sub_resource type="Environment" id="Environment_test"]
+background_mode = 1
+background_color = Color(0.025, 0.035, 0.05, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.35, 0.42, 0.52, 1)
+ambient_light_energy = 0.45
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.45
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape_floor"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="Material_floor"]
+albedo_color = Color(0.11, 0.14, 0.17, 1)
+metallic = 0.35
+roughness = 0.72
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_x"]
+size = Vector3(0.5, 4, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape_wall_x"]
+size = Vector3(0.5, 4, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_z"]
+size = Vector3(20, 4, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape_wall_z"]
+size = Vector3(20, 4, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Material_wall"]
+albedo_color = Color(0.22, 0.25, 0.28, 1)
+metallic = 0.2
+roughness = 0.62
+
+[sub_resource type="BoxMesh" id="BoxMesh_crate"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape_crate"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="Material_crate"]
+albedo_color = Color(0.3, 0.23, 0.12, 1)
+metallic = 0.45
+roughness = 0.55
+
+[node name="MovementTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_test")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-55, -30, 0)
+light_color = Color(0.72, 0.82, 1, 1)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="FillLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 3.2, 0)
+light_color = Color(1, 0.68, 0.38, 1)
+light_energy = 2.0
+omni_range = 8.0
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector3(0, 0.01, 6)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_floor")
+material_override = SubResource("Material_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="WestWall" type="StaticBody3D" parent="."]
+position = Vector3(-10, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WestWall"]
+mesh = SubResource("BoxMesh_wall_x")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestWall"]
+shape = SubResource("BoxShape_wall_x")
+
+[node name="EastWall" type="StaticBody3D" parent="."]
+position = Vector3(10, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EastWall"]
+mesh = SubResource("BoxMesh_wall_x")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastWall"]
+shape = SubResource("BoxShape_wall_x")
+
+[node name="NorthWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NorthWall"]
+mesh = SubResource("BoxMesh_wall_z")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthWall"]
+shape = SubResource("BoxShape_wall_z")
+
+[node name="SouthWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SouthWall"]
+mesh = SubResource("BoxMesh_wall_z")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthWall"]
+shape = SubResource("BoxShape_wall_z")
+
+[node name="CrateOne" type="StaticBody3D" parent="."]
+position = Vector3(-3, 0.6, 1.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateOne"]
+mesh = SubResource("BoxMesh_crate")
+material_override = SubResource("Material_crate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateOne"]
+shape = SubResource("BoxShape_crate")
+
+[node name="CrateTwo" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0.6, -1.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateTwo"]
+mesh = SubResource("BoxMesh_crate")
+material_override = SubResource("Material_crate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateTwo"]
+shape = SubResource("BoxShape_crate")
+
+[node name="CrateStackBottom" type="StaticBody3D" parent="."]
+position = Vector3(5, 0.6, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateStackBottom"]
+mesh = SubResource("BoxMesh_crate")
+material_override = SubResource("Material_crate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateStackBottom"]
+shape = SubResource("BoxShape_crate")
+
+[node name="CrateStackTop" type="StaticBody3D" parent="."]
+position = Vector3(5, 1.8, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrateStackTop"]
+mesh = SubResource("BoxMesh_crate")
+material_override = SubResource("Material_crate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrateStackTop"]
+shape = SubResource("BoxShape_crate")
