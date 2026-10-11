@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/props/sliding_door.tscn" id="2_sliding_door"]
 [ext_resource type="PackedScene" path="res://scenes/props/power_console.tscn" id="3_power_console"]
 [ext_resource type="PackedScene" path="res://scenes/props/terminal.tscn" id="4_terminal"]
 [ext_resource type="Script" path="res://scripts/systems/terminal_narrative_trigger.gd" id="5_mara_trigger"]
+[ext_resource type="Script" path="res://scripts/systems/narrative_flag_door_controller.gd" id="6_route_door_controller"]
 
 [sub_resource type="Environment" id="Environment_docking_bay"]
 background_mode = 1
@@ -71,6 +72,12 @@ size = Vector3(5.5, 1, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape_inner_corridor_floor"]
 size = Vector3(5.5, 1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_exit_wall"]
+size = Vector3(1.3, 4, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape_exit_wall"]
+size = Vector3(1.3, 4, 0.5)
 
 [node name="DockingBay" type="Node3D"]
 
@@ -225,14 +232,75 @@ material_override = SubResource("Material_wall")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InnerCorridorEastWall"]
 shape = SubResource("BoxShape_wall_section")
 
-[node name="InnerCorridorEndWall" type="StaticBody3D" parent="."]
-position = Vector3(0, 2, -18)
+[node name="ExitWallLeft" type="StaticBody3D" parent="."]
+position = Vector3(-1.85, 2, -18)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="InnerCorridorEndWall"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExitWallLeft"]
+mesh = SubResource("BoxMesh_exit_wall")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitWallLeft"]
+shape = SubResource("BoxShape_exit_wall")
+
+[node name="ExitWallRight" type="StaticBody3D" parent="."]
+position = Vector3(1.85, 2, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExitWallRight"]
+mesh = SubResource("BoxMesh_exit_wall")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitWallRight"]
+shape = SubResource("BoxShape_exit_wall")
+
+[node name="RouteDeeperDoor" parent="." instance=ExtResource("2_sliding_door")]
+position = Vector3(0, 0, -17.75)
+starts_locked = true
+open_offset = Vector3(0, 2.6, 0)
+
+[node name="ManifestRouteController" type="Node" parent="RouteDeeperDoor"]
+script = ExtResource("6_route_door_controller")
+required_flag = &"learned_original_passenger_count"
+
+[node name="RouteCorridorFloor" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.5, -21)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RouteCorridorFloor"]
+mesh = SubResource("BoxMesh_inner_corridor_floor")
+material_override = SubResource("Material_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RouteCorridorFloor"]
+shape = SubResource("BoxShape_inner_corridor_floor")
+
+[node name="RouteCorridorWestWall" type="StaticBody3D" parent="."]
+position = Vector3(-2.75, 2, -21)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RouteCorridorWestWall"]
 mesh = SubResource("BoxMesh_wall_section")
 material_override = SubResource("Material_wall")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InnerCorridorEndWall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RouteCorridorWestWall"]
+shape = SubResource("BoxShape_wall_section")
+
+[node name="RouteCorridorEastWall" type="StaticBody3D" parent="."]
+position = Vector3(2.75, 2, -21)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RouteCorridorEastWall"]
+mesh = SubResource("BoxMesh_wall_section")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RouteCorridorEastWall"]
+shape = SubResource("BoxShape_wall_section")
+
+[node name="RouteCorridorEndWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2, -24)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RouteCorridorEndWall"]
+mesh = SubResource("BoxMesh_wall_section")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RouteCorridorEndWall"]
 shape = SubResource("BoxShape_wall_section")
 
 [node name="MaintenanceCrateA" type="StaticBody3D" parent="."]
