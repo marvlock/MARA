@@ -90,7 +90,22 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Add a lightweight narrative-state system after the docking terminal is validated.
+Add MARA's first docking-bay terminal message after the narrative-state system is
+validated.
+
+## 2026-10-11 — Narrative State Foundation
+
+### Completed
+
+- Added `NarrativeState` as an autoloaded state store for flags and generic values.
+- Added named flag/value accessors and change signals for decoupled narrative systems.
+- Kept narrative behavior out of scenes and reusable prop scripts.
+
+### Follow-Up
+
+- Manually verified in Godot: the project starts without errors and `NarrativeState`
+  appears under `/root` in the Remote scene tree.
+- Next, add MARA's first docking-bay terminal message.
 
 ## 2026-10-11 — Docking Terminal
 
