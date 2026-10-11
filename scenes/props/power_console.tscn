@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactions/power_console.gd" id="1_power_script"]
+[ext_resource type="Script" path="res://scripts/interactions/interactable.gd" id="2_interactable_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cabinet"]
+size = Vector3(1.1, 1.7, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape_cabinet"]
+size = Vector3(1.1, 1.7, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="Material_cabinet"]
+albedo_color = Color(0.13, 0.17, 0.19, 1)
+metallic = 0.62
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_panel"]
+size = Vector3(0.78, 0.48, 0.04)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_status"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.04
+
+[node name="PowerConsole" type="StaticBody3D"]
+script = ExtResource("1_power_script")
+
+[node name="CabinetMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.85, 0)
+mesh = SubResource("BoxMesh_cabinet")
+material_override = SubResource("Material_cabinet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.85, 0)
+shape = SubResource("BoxShape_cabinet")
+
+[node name="PanelMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.08, 0.245)
+mesh = SubResource("BoxMesh_panel")
+material_override = SubResource("Material_cabinet")
+
+[node name="StatusMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.08, 0.29)
+rotation_degrees = Vector3(90, 0, 0)
+mesh = SubResource("CylinderMesh_status")
+
+[node name="StatusLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 1.08, 0.4)
+light_energy = 0.35
+omni_range = 2.0
+
+[node name="Interactable" type="Node" parent="."]
+script = ExtResource("2_interactable_script")
+interaction_text = "Restore Docking Power"
