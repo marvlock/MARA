@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://scenes/props/sliding_door.tscn" id="2_sliding_door"]
 [ext_resource type="PackedScene" path="res://scenes/props/power_console.tscn" id="3_power_console"]
 [ext_resource type="PackedScene" path="res://scenes/props/terminal.tscn" id="4_terminal"]
+[ext_resource type="Script" path="res://scripts/systems/terminal_narrative_trigger.gd" id="5_mara_trigger"]
 
 [sub_resource type="Environment" id="Environment_docking_bay"]
 background_mode = 1
@@ -259,6 +260,11 @@ position = Vector3(6.5, 0, -2.2)
 
 [node name="DockingTerminal" parent="." instance=ExtResource("4_terminal")]
 position = Vector3(-5.8, 0, -2.2)
+boot_message = "MARA // SHIP PRESERVATION SYSTEM\n\n12,184 passengers alive.\nMission successful."
+
+[node name="MaraContactTrigger" type="Node" parent="DockingTerminal"]
+script = ExtResource("5_mara_trigger")
+discovery_flag = &"met_mara"
 
 [connection signal="power_restored" from="DockingPowerConsole" to="LockedInnerDoor" method="unlock"]
 [connection signal="power_restored" from="DockingPowerConsole" to="DockingTerminal" method="set_powered" binds= [true]]
