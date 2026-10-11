@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactions/terminal.gd" id="1_terminal_script"]
+[ext_resource type="Script" path="res://scripts/interactions/interactable.gd" id="2_interactable_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(1.4, 1.6, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape_body"]
+size = Vector3(1.4, 1.6, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Material_body"]
+albedo_color = Color(0.12, 0.16, 0.19, 1)
+metallic = 0.68
+roughness = 0.46
+
+[sub_resource type="BoxMesh" id="BoxMesh_display"]
+size = Vector3(1.05, 0.76, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="Material_display"]
+albedo_color = Color(0.025, 0.08, 0.09, 1)
+emission_enabled = true
+emission = Color(0.02, 0.12, 0.13, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_status"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.04
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_terminal"]
+bg_color = Color(0.02, 0.055, 0.065, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.86, 0.84, 0.8)
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+
+[node name="Terminal" type="StaticBody3D"]
+script = ExtResource("1_terminal_script")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.8, 0)
+mesh = SubResource("BoxMesh_body")
+material_override = SubResource("Material_body")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.8, 0)
+shape = SubResource("BoxShape_body")
+
+[node name="DisplayMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.03, 0.275)
+mesh = SubResource("BoxMesh_display")
+material_override = SubResource("Material_display")
+
+[node name="ScreenLabel" type="Label3D" parent="."]
+position = Vector3(0, 1.02, 0.3)
+pixel_size = 0.005
+font_size = 42
+outline_size = 4
+modulate = Color(0.55, 0.98, 0.95, 1)
+text = "NO POWER"
+horizontal_alignment = 1
+
+[node name="StatusMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0.48, 0.43, 0.29)
+rotation_degrees = Vector3(90, 0, 0)
+mesh = SubResource("CylinderMesh_status")
+
+[node name="StatusLight" type="OmniLight3D" parent="."]
+position = Vector3(0.48, 0.43, 0.39)
+light_energy = 0.25
+omni_range = 1.5
+
+[node name="Interactable" type="Node" parent="."]
+script = ExtResource("2_interactable_script")
+interaction_text = "Terminal Offline"
+
+[node name="TerminalScreen" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Center" type="CenterContainer" parent="TerminalScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="TerminalScreen/Center"]
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_terminal")
+
+[node name="Margin" type="MarginContainer" parent="TerminalScreen/Center/Panel"]
+layout_mode = 2
+
+[node name="Text" type="Label" parent="TerminalScreen/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.64, 0.98, 0.95, 1)
+theme_override_font_sizes/font_size = 20
+text = "ARK-7 DOCKING TERMINAL"
+vertical_alignment = 1
