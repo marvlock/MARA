@@ -90,8 +90,25 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Create a basic docking-bay graybox after the reusable door is verified in the movement
-test scene.
+Implement a local-power interaction for the docking bay, then use it to unlock the
+inner pressure door.
+
+## 2026-10-11 — Docking-Bay Graybox
+
+### Completed
+
+- Added a playable docking-arrival scene as the project startup scene.
+- Built a compact graybox with an arrival platform, outer docking wall, maintenance
+  alcove, emergency lighting, clutter, and a sealed inner pressure door.
+- Kept the inner door locked to establish the later power-restoration objective without
+  implementing its logic ahead of schedule.
+
+### Follow-Up
+
+- Manually verified in Godot: player scale and navigation are readable, the maintenance
+  area is accessible, the scene boundaries hold, and the inner door correctly remains
+  locked.
+- Next, implement the local-power interaction that unlocks the inner pressure door.
 
 ## 2026-10-11 — Reusable Sliding Door
 
