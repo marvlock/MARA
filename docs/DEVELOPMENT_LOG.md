@@ -90,9 +90,33 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Create a reusable door scene that composes with the interaction system and supports
-locked/unlocked and open/closed states. Test it in `movement_test.tscn` before using it
-in the docking-bay graybox.
+Create a basic docking-bay graybox after the reusable door is verified in the movement
+test scene.
+
+## 2026-10-11 — Reusable Sliding Door
+
+### Completed
+
+- Added a reusable sliding door scene with a moving physical panel and interaction
+  component.
+- Added open, close, lock, unlock, and disable public controls for later narrative,
+  power, MARA, and scripted-event integrations.
+- Added explicit states for disabled, locked, closed, opening, open, and closing.
+- Added a test door to the movement test scene.
+
+### Validation
+
+- Confirmed scene resource paths and script references structurally.
+- Ran a whitespace check with no reported diff errors.
+- Manually tested in Godot: interaction prompts update correctly; the door opens and
+  closes; the opening becomes traversable; and the closed panel blocks player movement.
+- Godot was unavailable on the Windows PATH and WSL execution was denied, so a headless
+  runtime check was not available.
+
+### Follow-Up
+
+- Run a Godot editor/headless validation and manually verify the door opens and closes
+  without obstructing the player before building the docking-bay graybox.
 
 ## Entry Template
 
