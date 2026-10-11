@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/props/test_interaction_button.tscn" id="2_interaction_button"]
+[ext_resource type="PackedScene" path="res://scenes/props/sliding_door.tscn" id="3_sliding_door"]
 
 [sub_resource type="Environment" id="Environment_test"]
 background_mode = 1
@@ -70,6 +72,12 @@ omni_range = 8.0
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector3(0, 0.01, 6)
+
+[node name="TestInteractionButton" parent="." instance=ExtResource("2_interaction_button")]
+position = Vector3(0, 0, 2.5)
+
+[node name="TestSlidingDoor" parent="." instance=ExtResource("3_sliding_door")]
+position = Vector3(0, 0, -4)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 position = Vector3(0, -0.5, 0)
