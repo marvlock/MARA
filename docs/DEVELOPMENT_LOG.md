@@ -90,8 +90,24 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Add MARA's first docking-bay terminal message after the narrative-state system is
-validated.
+Add the original passenger manifest as the contradictory evidence after MARA's first
+terminal message is validated.
+
+## 2026-10-11 — MARA First Contact
+
+### Completed
+
+- Added the first MARA terminal message to the powered docking terminal: “12,184
+  passengers alive. Mission successful.”
+- Added a reusable terminal narrative trigger that records discoveries through
+  `NarrativeState` when a terminal is first opened.
+- Set the `met_mara` flag on the first terminal access.
+
+### Follow-Up
+
+- Manually verified in Godot: the message appears after local power is restored and
+  `NarrativeState` records `met_mara` on terminal access.
+- Next, add the original passenger manifest as contradictory evidence.
 
 ## 2026-10-11 — Narrative State Foundation
 
