@@ -90,8 +90,26 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Implement a local-power interaction for the docking bay, then use it to unlock the
-inner pressure door.
+Create a basic terminal system for the docking bay after the local-power interaction is
+validated.
+
+## 2026-10-11 — Docking Power Interaction
+
+### Completed
+
+- Added a reusable power-console scene driven by the shared interaction component.
+- Added a `power_restored` signal so levels can connect power activation to other
+  systems without level-specific interaction code.
+- Added the console to the docking-bay maintenance area and connected it directly to
+  unlock the inner pressure door.
+- Added a short, enclosed staging corridor beyond the door so the player remains within
+  the level after opening it.
+
+### Follow-Up
+
+- Manually verified in Godot: restoring power updates the console state, unlocks the
+  inner door, and allows the player to safely enter the staging corridor.
+- Next, create a basic docking-bay terminal system.
 
 ## 2026-10-11 — Docking-Bay Graybox
 

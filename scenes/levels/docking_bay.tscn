@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/props/sliding_door.tscn" id="2_sliding_door"]
+[ext_resource type="PackedScene" path="res://scenes/props/power_console.tscn" id="3_power_console"]
 
 [sub_resource type="Environment" id="Environment_docking_bay"]
 background_mode = 1
@@ -62,6 +63,12 @@ roughness = 0.5
 albedo_color = Color(0.28, 0.2, 0.11, 1)
 metallic = 0.4
 roughness = 0.58
+
+[sub_resource type="BoxMesh" id="BoxMesh_inner_corridor_floor"]
+size = Vector3(5.5, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape_inner_corridor_floor"]
+size = Vector3(5.5, 1, 6)
 
 [node name="DockingBay" type="Node3D"]
 
@@ -184,6 +191,48 @@ position = Vector3(0, 0, -11.75)
 starts_locked = true
 open_offset = Vector3(1.7, 0, 0)
 
+[node name="InnerCorridorFloor" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.5, -15)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InnerCorridorFloor"]
+mesh = SubResource("BoxMesh_inner_corridor_floor")
+material_override = SubResource("Material_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InnerCorridorFloor"]
+shape = SubResource("BoxShape_inner_corridor_floor")
+
+[node name="InnerCorridorWestWall" type="StaticBody3D" parent="."]
+position = Vector3(-2.75, 2, -15)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InnerCorridorWestWall"]
+mesh = SubResource("BoxMesh_wall_section")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InnerCorridorWestWall"]
+shape = SubResource("BoxShape_wall_section")
+
+[node name="InnerCorridorEastWall" type="StaticBody3D" parent="."]
+position = Vector3(2.75, 2, -15)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InnerCorridorEastWall"]
+mesh = SubResource("BoxMesh_wall_section")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InnerCorridorEastWall"]
+shape = SubResource("BoxShape_wall_section")
+
+[node name="InnerCorridorEndWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InnerCorridorEndWall"]
+mesh = SubResource("BoxMesh_wall_section")
+material_override = SubResource("Material_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InnerCorridorEndWall"]
+shape = SubResource("BoxShape_wall_section")
+
 [node name="MaintenanceCrateA" type="StaticBody3D" parent="."]
 position = Vector3(5.3, 0.6, 2.2)
 
@@ -203,3 +252,8 @@ material_override = SubResource("Material_crate")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MaintenanceCrateB"]
 shape = SubResource("BoxShape_crate")
+
+[node name="DockingPowerConsole" parent="." instance=ExtResource("3_power_console")]
+position = Vector3(6.5, 0, -2.2)
+
+[connection signal="power_restored" from="DockingPowerConsole" to="LockedInnerDoor" method="unlock"]
