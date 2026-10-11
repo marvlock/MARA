@@ -90,8 +90,21 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Create a basic terminal system for the docking bay after the local-power interaction is
-validated.
+Add a lightweight narrative-state system after the docking terminal is validated.
+
+## 2026-10-11 — Docking Terminal
+
+### Completed
+
+- Added a reusable, power-gated terminal scene using the shared interaction component.
+- Added a minimal terminal overlay with a boot/status message and a 3D screen state.
+- Connected the docking power console to activate the terminal once local power returns.
+
+### Follow-Up
+
+- Manually verified in Godot: the terminal remains offline before power restoration,
+  becomes ready afterward, and opens/closes its display through interaction.
+- Next, add a lightweight narrative-state system.
 
 ## 2026-10-11 — Docking Power Interaction
 
