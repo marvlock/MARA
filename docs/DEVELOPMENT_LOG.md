@@ -90,7 +90,23 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Plan or begin the next playable area: Habitation.
+Expand the Habitation graybox with connected rooms and its first narrative interaction.
+
+## 2026-10-11 — Habitation Graybox
+
+### Completed
+
+- Added a standalone, playable Habitation test scene.
+- Established a warmer, more human-scale communal space with beds, lockers, a table,
+  sector signage, and restrained lighting.
+- Kept it separate from the docking endpoint until scene-transition behavior is planned.
+
+### Follow-Up
+
+- Manually verified in Godot: the room boundaries, player scale, and geometry read
+  correctly. Lighting is intentionally subdued but remains navigable at this stage.
+- Next, expand the Habitation graybox with connected rooms or add the first passenger
+  interaction.
 
 ## 2026-10-11 — Docking-Bay Vertical Slice Endpoint
 
