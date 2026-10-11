@@ -90,8 +90,22 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Add the original passenger manifest as the contradictory evidence after MARA's first
-terminal message is validated.
+Open the route deeper into ARK-7 after the player reads the passenger manifest.
+
+## 2026-10-11 — Passenger Manifest Reveal
+
+### Completed
+
+- Added a powered archive terminal beyond the inner pressure door.
+- Added the original embarkation manifest showing 8,700 registered passengers.
+- Added the `learned_original_passenger_count` narrative flag when the manifest is
+  accessed, establishing the contradiction with MARA's 12,184-passenger report.
+
+### Follow-Up
+
+- Manually verified in Godot: the archive terminal is accessible after power
+  restoration and shows the manifest after the player passes through the inner door.
+- Next, open the route deeper into ARK-7 after the manifest is read.
 
 ## 2026-10-11 — MARA First Contact
 

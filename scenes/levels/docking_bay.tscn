@@ -266,5 +266,14 @@ boot_message = "MARA // SHIP PRESERVATION SYSTEM\n\n12,184 passengers alive.\nMi
 script = ExtResource("5_mara_trigger")
 discovery_flag = &"met_mara"
 
+[node name="PassengerManifestArchive" parent="." instance=ExtResource("4_terminal")]
+position = Vector3(0, 0, -16.4)
+boot_message = "ARK-7 // ORIGINAL EMBARKATION MANIFEST\n\nREGISTERED PASSENGERS: 8,700\nMISSION STATUS: DEPARTED\n\nRecord sealed at launch."
+
+[node name="ManifestDiscoveryTrigger" type="Node" parent="PassengerManifestArchive"]
+script = ExtResource("5_mara_trigger")
+discovery_flag = &"learned_original_passenger_count"
+
 [connection signal="power_restored" from="DockingPowerConsole" to="LockedInnerDoor" method="unlock"]
 [connection signal="power_restored" from="DockingPowerConsole" to="DockingTerminal" method="set_powered" binds= [true]]
+[connection signal="power_restored" from="DockingPowerConsole" to="PassengerManifestArchive" method="set_powered" binds= [true]]
