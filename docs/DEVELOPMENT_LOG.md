@@ -90,7 +90,23 @@ applicable, and any remaining manual test or follow-up work.
 
 ## Next Recommended Task
 
-Open the route deeper into ARK-7 after the player reads the passenger manifest.
+Connect the finished docking-bay sequence into a clear vertical-slice endpoint.
+
+## 2026-10-11 — Route Deeper into ARK-7
+
+### Completed
+
+- Added a reusable narrative-flag door controller.
+- Added a second locked pressure door beyond the passenger manifest archive.
+- Connected the manifest discovery flag to unlock and automatically open the route
+  deeper into the ship.
+- Added a safe transition corridor beyond the opened route door.
+
+### Follow-Up
+
+- Manually verified in Godot: opening the passenger manifest opens the route door and
+  the transition corridor is traversable without leaving the level.
+- Next, add a clear vertical-slice endpoint beyond the opened route.
 
 ## 2026-10-11 — Passenger Manifest Reveal
 
